@@ -1,0 +1,9 @@
+@import './styles/fonts.css';
+@import './styles/tokens.css';
+@import './styles/global.css';
+
+.app-shell {
+  position: relative;
+  min-height: 100svh;
+  background: var(--color-background-canvas);
+}

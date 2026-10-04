@@ -1,0 +1,44 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="badgeGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="55%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+    <linearGradient id="sheen1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="innerShadow1" cx="50%" cy="100%" r="80%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="dropshadow1" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#7c3aed" flood-opacity="0.45"/>
+    </filter>
+    <filter id="iconShadow1" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- extruded base (gives depth/3D feel) -->
+  <rect x="26" y="34" width="148" height="148" rx="34" fill="#2e1065"/>
+
+  <!-- main glossy face -->
+  <g filter="url(#dropshadow1)">
+    <rect x="22" y="26" width="148" height="148" rx="34" fill="url(#badgeGrad1)"/>
+    <rect x="22" y="26" width="148" height="148" rx="34" fill="url(#innerShadow1)"/>
+    <rect x="22" y="26" width="148" height="74" rx="34" fill="url(#sheen1)"/>
+  </g>
+
+  <!-- top highlight edge -->
+  <path d="M40 30 Q96 18 152 30" stroke="#ffffff" stroke-opacity="0.5" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- code bracket icon -->
+  <g filter="url(#iconShadow1)" stroke="#f5f3ff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M78 68 L54 100 L78 132"/>
+    <path d="M118 68 L142 100 L118 132"/>
+    <line x1="106" y1="62" x2="94" y2="138"/>
+  </g>
+</svg>

@@ -1,0 +1,44 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c2022"/>
+      <stop offset="100%" stop-color="#0a0a12"/>
+    </linearGradient>
+    <linearGradient id="crossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <filter id="glow4" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="200" height="200" rx="36" fill="url(#bgGrad4)"/>
+  <rect x="1" y="1" width="198" height="198" rx="35" fill="none" stroke="#2dd4bf33" stroke-width="1.5"/>
+
+  <!-- calendar frame -->
+  <g filter="url(#glow4)">
+    <rect x="46" y="52" width="108" height="98" rx="12" fill="none" stroke="#5eead4" stroke-width="4"/>
+    <line x1="46" y1="76" x2="154" y2="76" stroke="#5eead4" stroke-width="4"/>
+    <line x1="72" y1="40" x2="72" y2="60" stroke="#5eead4" stroke-width="4" stroke-linecap="round"/>
+    <line x1="128" y1="40" x2="128" y2="60" stroke="#5eead4" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- medical cross badge centered in calendar body -->
+  <g filter="url(#glow4)">
+    <circle cx="100" cy="114" r="26" fill="#0a0a12" stroke="url(#crossGrad)" stroke-width="3"/>
+    <path d="M100 100 V128 M86 114 H114" stroke="url(#crossGrad)" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <!-- small dots marking other calendar days -->
+  <g fill="#2dd4bf" opacity="0.5">
+    <circle cx="64" cy="90" r="3"/>
+    <circle cx="136" cy="90" r="3"/>
+    <circle cx="64" cy="136" r="3"/>
+    <circle cx="136" cy="136" r="3"/>
+  </g>
+</svg>

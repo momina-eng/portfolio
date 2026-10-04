@@ -1,0 +1,50 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#131025"/>
+      <stop offset="100%" stop-color="#0a0a12"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <filter id="glow2" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="200" height="200" rx="36" fill="url(#bgGrad2)"/>
+  <rect x="1" y="1" width="198" height="198" rx="35" fill="none" stroke="#a78bfa33" stroke-width="1.5"/>
+
+  <!-- magnifying glass -->
+  <g filter="url(#glow2)">
+    <circle cx="88" cy="88" r="38" fill="none" stroke="url(#ringGrad)" stroke-width="6"/>
+    <line x1="115" y1="115" x2="150" y2="150" stroke="url(#ringGrad)" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <!-- neural nodes inside the lens, representing embeddings/semantic vectors -->
+  <g>
+    <circle cx="72" cy="76" r="4" fill="#c4b5fd"/>
+    <circle cx="100" cy="72" r="4" fill="#c4b5fd"/>
+    <circle cx="80" cy="102" r="4" fill="#c4b5fd"/>
+    <circle cx="104" cy="98" r="4" fill="#c4b5fd"/>
+    <g stroke="#c4b5fd" stroke-width="1.6" opacity="0.7">
+      <line x1="72" y1="76" x2="100" y2="72"/>
+      <line x1="72" y1="76" x2="80" y2="102"/>
+      <line x1="100" y1="72" x2="104" y2="98"/>
+      <line x1="80" y1="102" x2="104" y2="98"/>
+    </g>
+  </g>
+
+  <!-- faint orbiting dots outside, representing distributed search -->
+  <g fill="#818cf8" opacity="0.5">
+    <circle cx="150" cy="46" r="3"/>
+    <circle cx="168" cy="70" r="2.5"/>
+    <circle cx="38" cy="140" r="2.5"/>
+    <circle cx="52" cy="160" r="3"/>
+  </g>
+</svg>

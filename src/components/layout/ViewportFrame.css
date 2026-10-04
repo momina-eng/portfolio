@@ -1,0 +1,101 @@
+.viewport-frame {
+  --frame-margin-block: 0.75rem;
+  --frame-margin-inline: 0.75rem;
+  --frame-radius: 14px;
+  --frame-glow: 0 0 28px rgba(139, 92, 246, 0.16),
+    0 0 56px rgba(139, 92, 246, 0.08);
+
+  position: relative;
+  z-index: var(--z-frame);
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - (var(--frame-margin-block) * 2));
+  margin: var(--frame-margin-block) var(--frame-margin-inline);
+  border: var(--border-frame-stroke);
+  border-radius: var(--frame-radius);
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      rgba(139, 92, 246, 0.08),
+      transparent 55%
+    ),
+    var(--color-background-base);
+  box-shadow: var(--frame-glow);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Glow pulse via opacity (cheaper than animating box-shadow) */
+.viewport-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    0 0 48px rgba(139, 92, 246, 0.28),
+    0 0 96px rgba(139, 92, 246, 0.12);
+  opacity: 0;
+  z-index: 0;
+}
+
+.viewport-frame__content {
+  position: relative;
+  z-index: var(--z-content);
+  flex: 1;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .viewport-frame {
+    --frame-margin-block: 1rem;
+    --frame-margin-inline: 1rem;
+    --frame-radius: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .viewport-frame {
+    --frame-margin-block: 1.25rem;
+    --frame-margin-inline: 1.5rem;
+    --frame-radius: 20px;
+    --frame-glow: 0 0 36px rgba(139, 92, 246, 0.2),
+      0 0 72px rgba(139, 92, 246, 0.09);
+  }
+}
+
+@media (min-width: 1024px) {
+  .viewport-frame {
+    --frame-margin-block: 1.75rem;
+    --frame-margin-inline: 2rem;
+    --frame-radius: var(--radius-frame);
+    --frame-glow: 0 0 44px rgba(139, 92, 246, 0.24),
+      0 0 88px rgba(139, 92, 246, 0.1);
+  }
+}
+
+@media (min-width: 1440px) {
+  .viewport-frame {
+    --frame-margin-block: 2.5rem;
+    --frame-margin-inline: 3rem;
+    --frame-glow: 0 0 52px rgba(139, 92, 246, 0.26),
+      0 0 100px rgba(139, 92, 246, 0.12);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .viewport-frame::after {
+    animation: frame-glow-pulse var(--duration-frame-pulse) var(--ease-smooth)
+      infinite alternate;
+  }
+}
+
+@keyframes frame-glow-pulse {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

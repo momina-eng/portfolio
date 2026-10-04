@@ -1,0 +1,101 @@
+.hero-swirl {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* ~14% overall — reads as 10–20% against the dark hero */
+  opacity: 0.14;
+}
+
+.hero-swirl__svg {
+  position: absolute;
+  /* Bias toward the stage (right) like the reference vortex */
+  left: 8%;
+  top: -6%;
+  width: 108%;
+  height: 112%;
+}
+
+/* Soft fade so lines don't compete with left copy */
+.hero-swirl::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-background-canvas) 0%,
+    transparent 38%,
+    transparent 100%
+  );
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .hero-swirl {
+    opacity: 0.155;
+  }
+
+  .hero-swirl__svg {
+    left: 12%;
+    top: -8%;
+    width: 105%;
+    height: 116%;
+  }
+
+  .hero-swirl::after {
+    background: linear-gradient(
+      90deg,
+      var(--color-background-canvas) 0%,
+      transparent 32%,
+      transparent 100%
+    );
+    opacity: 0.55;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-swirl {
+    opacity: 0.16;
+  }
+
+  .hero-swirl__svg {
+    left: 18%;
+    width: 100%;
+  }
+
+  .hero-swirl::after {
+    opacity: 0.4;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Keep swirl under the stage, lightly present under copy */
+  .hero-swirl {
+    opacity: 0.11;
+  }
+
+  .hero-swirl__svg {
+    left: 0;
+    top: 28%;
+    width: 140%;
+    height: 85%;
+  }
+
+  .hero-swirl::after {
+    background: linear-gradient(
+      180deg,
+      var(--color-background-canvas) 0%,
+      transparent 42%,
+      transparent 100%
+    );
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-swirl {
+    opacity: 0.12;
+  }
+}

@@ -1,0 +1,416 @@
+.compact-project {
+  position: relative;
+  min-width: 0;
+  height: 100%;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  border-radius: var(--radius-xl);
+}
+
+/* Visual card surface — tilts; not the click target. */
+.compact-project__surface {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --glare-x: 50%;
+  --glare-y: 40%;
+  --tilt-scale: 1;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  color: inherit;
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--color-surface-raised) 92%, #1a1430) 0%,
+      color-mix(in srgb, var(--color-surface) 96%, transparent) 55%,
+      color-mix(in srgb, var(--bg-base) 88%, #120c22) 100%
+    )
+    padding-box,
+    linear-gradient(
+      135deg,
+      rgba(167, 139, 250, 0.55) 0%,
+      rgba(139, 92, 246, 0.22) 38%,
+      rgba(96, 165, 250, 0.35) 72%,
+      rgba(192, 38, 211, 0.4) 100%
+    )
+    border-box;
+  border: 1px solid transparent;
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(139, 92, 246, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y))
+    scale3d(var(--tilt-scale), var(--tilt-scale), 1);
+  transform-style: preserve-3d;
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms var(--ease-smooth);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.compact-project--tilt .compact-project__surface {
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms var(--ease-smooth);
+}
+
+.compact-project--tilt:hover .compact-project__surface {
+  transition:
+    transform 110ms ease-out,
+    box-shadow 280ms var(--ease-smooth);
+}
+
+/* Non-tilting hit layer — keeps clicks stable while the surface transforms. */
+.compact-project__hit {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  border-radius: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  color: transparent;
+  background: transparent;
+}
+
+.compact-project__shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  opacity: 0;
+  background: radial-gradient(
+    420px circle at var(--glare-x) var(--glare-y),
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(167, 139, 250, 0.08) 28%,
+    transparent 62%
+  );
+  mix-blend-mode: soft-light;
+  transition: opacity 280ms var(--ease-smooth);
+}
+
+.compact-project__media {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(
+      ellipse at 30% 18%,
+      rgba(139, 92, 246, 0.32),
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse at 78% 80%,
+      rgba(192, 38, 211, 0.16),
+      transparent 48%
+    ),
+    linear-gradient(160deg, #12101c 0%, #0a0814 55%, #08070f 100%);
+}
+
+.compact-project__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transform: scale(1.01);
+  transition: transform 480ms var(--ease-smooth);
+}
+
+/*
+  Logos: size the img to ~65–75% of the frame (not stretch-to-fill).
+  Square sources (NewsSense/VoiceX/MediFlow 1:1) need a higher max-height
+  than the landscape VulnAgent (1.5:1) to keep visual weight consistent.
+*/
+.compact-project__image--logo {
+  width: auto;
+  height: auto;
+  max-width: 68%;
+  max-height: 72%;
+  object-fit: contain;
+  object-position: center;
+  padding: 0;
+  transform: none;
+  flex-shrink: 0;
+}
+
+.compact-project__media[data-logo='vuln-agent'] .compact-project__image--logo {
+  max-width: 78%;
+  max-height: 70%;
+}
+
+.compact-project__media[data-logo='medisync'] .compact-project__image--logo,
+.compact-project__media[data-logo='newssense'] .compact-project__image--logo,
+.compact-project__media[data-logo='voicex'] .compact-project__image--logo,
+.compact-project__media[data-logo='mediflow'] .compact-project__image--logo {
+  max-width: 58%;
+  max-height: 86%;
+}
+
+.compact-project__placeholder {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(
+      circle at 22% 30%,
+      rgba(167, 139, 250, 0.45),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 78% 70%,
+      rgba(192, 38, 211, 0.28),
+      transparent 48%
+    ),
+    linear-gradient(135deg, #12101c 0%, #1a1230 45%, #0d0a16 100%);
+  animation: compact-project-shimmer 7s ease-in-out infinite;
+}
+
+@keyframes compact-project-shimmer {
+  0%,
+  100% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  50% {
+    filter: hue-rotate(18deg) brightness(1.08);
+  }
+}
+
+.compact-project__media-fade {
+  pointer-events: none;
+  position: absolute;
+  inset: auto 0 0;
+  height: 42%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-surface) 88%, #0a0814) 100%
+  );
+}
+
+.compact-project__media:has(.compact-project__image--logo)
+  .compact-project__media-fade {
+  height: 28%;
+  opacity: 0.55;
+}
+
+.compact-project__body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  gap: 0;
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+
+.compact-project__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  margin-bottom: var(--space-3);
+}
+
+.compact-project__badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: calc(100% - 2rem);
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-accent) 42%, transparent);
+  background: color-mix(in srgb, var(--color-accent) 16%, transparent);
+  color: var(--color-accent-light);
+  font-size: 0.68rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.compact-project__arrow {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1;
+  transition:
+    color var(--duration-base) var(--ease-smooth),
+    transform var(--duration-base) var(--ease-smooth);
+}
+
+.compact-project__title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.6vw, 1.42rem);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-snug);
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+.compact-project__tagline {
+  margin: 0 0 var(--space-3);
+  color: color-mix(in srgb, var(--color-accent-light) 72%, white);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  line-height: 1.4;
+}
+
+.compact-project__summary {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.compact-project__tags {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.compact-project__pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  color: var(--color-accent-light);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.compact-project__cta {
+  margin-top: var(--space-4);
+  color: var(--color-accent-light);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.01em;
+  transition: transform var(--duration-base) var(--ease-smooth);
+}
+
+.compact-project__hit:focus-visible {
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: 3px;
+}
+
+/* Fine-pointer hover: glow lift + shine (tilt handled via CSS vars) */
+@media (hover: hover) and (pointer: fine) {
+  .compact-project:hover .compact-project__surface {
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.48),
+      0 0 32px rgba(139, 92, 246, 0.22),
+      0 0 0 1px rgba(167, 139, 250, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .compact-project:hover .compact-project__shine {
+    opacity: 1;
+  }
+
+  .compact-project:hover .compact-project__image:not(.compact-project__image--logo) {
+    transform: scale(1.045);
+  }
+
+  .compact-project:hover .compact-project__image--logo {
+    transform: scale(1.03);
+  }
+
+  .compact-project:hover .compact-project__arrow {
+    color: var(--color-accent-light);
+    transform: translate(2px, -2px);
+  }
+
+  .compact-project:hover .compact-project__cta {
+    transform: translateX(3px);
+  }
+
+  /* Non-tilt devices still get a gentle lift */
+  .compact-project:not(.compact-project--tilt):hover .compact-project__surface {
+    transform: translateY(-4px) scale(1.01);
+  }
+}
+
+/* Touch: press feedback only */
+@media (hover: none), (pointer: coarse) {
+  .compact-project:has(.compact-project__hit:active) .compact-project__surface {
+    transform: scale(0.985);
+    transition-duration: 100ms;
+  }
+
+  .compact-project__placeholder {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compact-project__surface,
+  .compact-project__image,
+  .compact-project__shine,
+  .compact-project__arrow,
+  .compact-project__cta {
+    transition: none !important;
+  }
+
+  .compact-project__placeholder {
+    animation: none;
+  }
+
+  .compact-project__surface {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .compact-project__image--logo {
+    max-width: 72%;
+    max-height: 76%;
+  }
+
+  .compact-project__media[data-logo='vuln-agent'] .compact-project__image--logo {
+    max-width: 84%;
+    max-height: 72%;
+  }
+
+  .compact-project__media[data-logo='medisync'] .compact-project__image--logo,
+  .compact-project__media[data-logo='newssense'] .compact-project__image--logo,
+  .compact-project__media[data-logo='voicex'] .compact-project__image--logo,
+  .compact-project__media[data-logo='mediflow'] .compact-project__image--logo {
+    max-width: 62%;
+    max-height: 88%;
+  }
+}
+
+@media (min-width: 768px) {
+  .compact-project__body {
+    padding: var(--space-5);
+  }
+}
+

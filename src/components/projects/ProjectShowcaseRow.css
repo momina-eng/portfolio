@@ -1,0 +1,106 @@
+.showcase-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  align-items: center;
+  padding-block: var(--space-7);
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 85%, transparent);
+}
+
+.showcase-row__media {
+  min-width: 0;
+}
+
+.showcase-row__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.showcase-row__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.showcase-row__badge {
+  display: inline-flex;
+  padding: 0.28rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+  color: var(--color-accent-light);
+  font-size: 0.7rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.showcase-row__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-snug);
+  line-height: 1.2;
+}
+
+.showcase-row__subtitle {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+}
+
+.showcase-row__summary {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  line-height: var(--leading-relaxed);
+}
+
+.showcase-row__tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.showcase-row__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  color: var(--color-accent-light);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+}
+
+.showcase-row__cta:hover,
+.showcase-row__cta:focus-visible {
+  color: var(--color-text-primary);
+}
+
+@media (min-width: 960px) {
+  .showcase-row {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: var(--space-8);
+    padding-block: var(--space-8);
+  }
+
+  .showcase-row--reverse {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  }
+
+  .showcase-row--reverse .showcase-row__media {
+    order: 2;
+  }
+
+  .showcase-row--reverse .showcase-row__content {
+    order: 1;
+  }
+}

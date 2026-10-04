@@ -1,0 +1,15 @@
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: calc(var(--z-decoration) + 1);
+  pointer-events: none;
+  opacity: 0.028;
+  mix-blend-mode: soft-light;
+  overflow: hidden;
+}
+
+.grain-overlay__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

@@ -1,0 +1,111 @@
+.technologies {
+  position: relative;
+  z-index: var(--z-content);
+  padding: var(--section-pad-y) 0 var(--section-pad-y-end);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 420px;
+}
+
+.technologies__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.technologies__lede {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  line-height: var(--leading-relaxed);
+  text-align: center;
+}
+
+.technologies__header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.technologies__header .section-heading-block {
+  align-items: center;
+}
+
+.technologies__header .section-heading-block__label,
+.technologies__header .section-heading {
+  text-align: center;
+}
+
+.technologies__grid {
+  --field-parallax-x: 0px;
+  --field-parallax-y: 0px;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5) var(--space-3);
+  justify-items: center;
+  align-items: start;
+  perspective: 1200px;
+}
+
+.technologies__grid--parallax {
+  transform: translate3d(var(--field-parallax-x), var(--field-parallax-y), 0);
+}
+
+.technologies__item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .technologies__grid--parallax {
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .technologies__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6) var(--space-4);
+  }
+}
+
+@media (min-width: 768px) {
+  .technologies__grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-6) var(--space-5);
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .technologies__inner {
+    gap: var(--space-7);
+  }
+
+  .technologies__grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    max-width: 56rem;
+    gap: var(--space-7) var(--space-6);
+  }
+}
+
+@media (min-width: 1200px) {
+  .technologies__grid {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    max-width: 64rem;
+    gap: var(--space-7) var(--space-5);
+  }
+}

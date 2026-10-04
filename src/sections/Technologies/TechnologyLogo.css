@@ -1,0 +1,277 @@
+.tech-logo {
+  --tech-accent: #94a3b8;
+  --tech-depth: #1e293b;
+  --float-duration: 5.5s;
+  --float-delay: 0s;
+  --float-amp: 2px;
+  --glare-x: 50%;
+  --glare-y: 50%;
+  --shadow-x: 0px;
+  --shadow-y: 8px;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.55rem 0.45rem;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: default;
+  outline: none;
+  transition:
+    border-color var(--duration-base) var(--ease-smooth),
+    background-color var(--duration-base) var(--ease-smooth);
+}
+
+.tech-logo:focus-visible {
+  border-color: color-mix(in srgb, var(--color-accent-light) 45%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent-light) 35%, transparent);
+}
+
+.tech-logo--interactive.tech-logo--active {
+  background: color-mix(in srgb, var(--tech-accent) 4%, transparent);
+  border-color: color-mix(in srgb, var(--tech-accent) 12%, transparent);
+}
+
+.tech-logo__perspective {
+  perspective: 900px;
+  perspective-origin: 50% 45%;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+}
+
+.tech-logo__float {
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+}
+
+.tech-logo:not(.tech-logo--reduced) .tech-logo__float {
+  animation: tech-logo-float var(--float-duration) ease-in-out var(--float-delay) infinite;
+}
+
+.tech-logo__object {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.35rem;
+  height: 3.35rem;
+  transform-style: preserve-3d;
+  /* Avoid will-change here — can soften SVG edges in Chromium during 3D transforms */
+}
+
+/* Softest layer — behind mark; never applied as a filter on the logo */
+.tech-logo__glow {
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 45%,
+    color-mix(in srgb, var(--tech-accent) 12%, transparent) 0%,
+    transparent 62%
+  );
+  opacity: 0.14;
+  pointer-events: none;
+  transform: translateZ(-36px);
+  transition: opacity 160ms var(--ease-smooth);
+  z-index: 0;
+}
+
+.tech-logo--active .tech-logo__glow {
+  opacity: 0.26;
+}
+
+/* Controlled ground shadow — soft alone, not washing the mark */
+.tech-logo__cast-shadow {
+  position: absolute;
+  left: 50%;
+  top: 82%;
+  width: 52%;
+  height: 14%;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgb(0 0 0 / 0.4) 0%,
+    rgb(0 0 0 / 0) 72%
+  );
+  opacity: 0.28;
+  pointer-events: none;
+  transform: translate3d(var(--shadow-x), var(--shadow-y), -40px);
+  filter: blur(4px);
+  transition: opacity 160ms var(--ease-smooth);
+  z-index: 0;
+}
+
+.tech-logo--active .tech-logo__cast-shadow {
+  opacity: 0.42;
+}
+
+/* Extrusion + front face — no global filters on this group */
+.tech-logo__extrude {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  z-index: 1;
+  filter: none;
+}
+
+.tech-logo__slab,
+.tech-logo__face {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  filter: none;
+}
+
+/* Depth slabs: solid darker brand color, crisp edges */
+.tech-logo__slab {
+  transform: translate3d(var(--slab-x), var(--slab-y), var(--slab-z));
+  pointer-events: none;
+  opacity: 1;
+}
+
+.tech-logo__slab .tech-logo__svg {
+  shape-rendering: geometricPrecision;
+}
+
+/* Front face — sharpest element in the stack */
+.tech-logo__face {
+  position: relative;
+  z-index: 2;
+  color: var(--tech-accent);
+  transform: translate3d(0, 0, 3px);
+  isolation: isolate;
+  opacity: 1;
+  filter: none !important;
+}
+
+.tech-logo__face .tech-logo__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  shape-rendering: geometricPrecision;
+  filter: none;
+}
+
+.tech-logo__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Specular only — kept tight so it does not soften the mark */
+.tech-logo__highlight {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: 22%;
+  opacity: 0;
+  z-index: 3;
+  transform: translate3d(0, 0, 5px);
+  background: radial-gradient(
+    circle at var(--glare-x) var(--glare-y),
+    rgb(255 255 255 / 0.28) 0%,
+    rgb(255 255 255 / 0.06) 14%,
+    transparent 36%
+  );
+  mix-blend-mode: soft-light;
+  transition: opacity 140ms var(--ease-smooth);
+}
+
+.tech-logo--active .tech-logo__highlight {
+  opacity: 0.7;
+}
+
+.tech-logo__name {
+  max-width: 6.5rem;
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity var(--duration-base) var(--ease-smooth),
+    transform var(--duration-base) var(--ease-smooth),
+    color var(--duration-base) var(--ease-smooth);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tech-logo--interactive:hover .tech-logo__name,
+  .tech-logo--interactive:focus-within .tech-logo__name,
+  .tech-logo--active .tech-logo__name {
+    opacity: 1;
+    transform: translateY(0);
+    color: var(--color-text-secondary);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .tech-logo__name {
+    opacity: 0.85;
+    transform: none;
+  }
+
+  .tech-logo__glow {
+    opacity: 0.12;
+  }
+}
+
+@media (min-width: 768px) {
+  .tech-logo__object {
+    width: 3.85rem;
+    height: 3.85rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tech-logo__object {
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+}
+
+@keyframes tech-logo-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, calc(var(--float-amp) * -1), 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-logo__float {
+    animation: none !important;
+  }
+
+  .tech-logo__highlight {
+    display: none;
+  }
+
+  .tech-logo__cast-shadow {
+    filter: none;
+    opacity: 0.22;
+    transform: translate3d(0, 6px, -24px);
+  }
+}

@@ -1,0 +1,83 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: var(--tracking-wide);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-base) var(--ease-smooth),
+    border-color var(--duration-base) var(--ease-smooth),
+    color var(--duration-base) var(--ease-smooth),
+    box-shadow var(--duration-base) var(--ease-smooth),
+    opacity var(--duration-fast) var(--ease-standard);
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.button--md {
+  min-height: 2.75rem;
+  padding: 0.85rem 1.25rem;
+  font-size: var(--text-small);
+}
+
+.button--sm {
+  min-height: 2.25rem;
+  padding: 0.55rem 0.9rem;
+  font-size: var(--text-label);
+}
+
+.button--primary {
+  color: var(--color-text-primary);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-accent) 88%, #1a1028),
+    color-mix(in srgb, var(--color-accent-secondary) 55%, var(--color-accent))
+  );
+  border: var(--border-width-hairline) solid
+    color-mix(in srgb, var(--color-accent-light) 45%, transparent);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button--primary:hover:not(:disabled) {
+    box-shadow: var(--glow-card);
+    border-color: color-mix(in srgb, var(--color-accent-light) 70%, transparent);
+  }
+}
+
+.button--secondary {
+  color: var(--color-text-primary);
+  background: color-mix(in srgb, var(--color-surface-raised) 80%, transparent);
+  border: var(--border-card);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button--secondary:hover:not(:disabled) {
+    border-color: color-mix(in srgb, var(--color-border-strong) 50%, transparent);
+    background: var(--color-surface-raised);
+  }
+}
+
+.button--ghost {
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: var(--border-width-hairline) solid transparent;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button--ghost:hover:not(:disabled) {
+    color: var(--color-text-primary);
+    background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+    border-color: var(--color-border);
+  }
+}

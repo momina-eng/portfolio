@@ -1,0 +1,41 @@
+.card {
+  position: relative;
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text-primary);
+}
+
+.card--padded {
+  padding: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .card--padded {
+    padding: var(--space-6);
+  }
+}
+
+.card--interactive {
+  transition:
+    border-color var(--duration-base) var(--ease-smooth),
+    background-color var(--duration-base) var(--ease-smooth),
+    box-shadow var(--duration-base) var(--ease-smooth),
+    transform var(--duration-base) var(--ease-smooth);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card--interactive:hover {
+    border-color: color-mix(in srgb, var(--color-border-strong) 55%, transparent);
+    background: color-mix(in srgb, var(--color-surface-raised) 90%, transparent);
+    box-shadow: var(--shadow-sm), var(--glow-card);
+    transform: translateY(-4px);
+  }
+}
+
+.card--interactive:focus-visible {
+  border-color: var(--color-border-strong);
+}

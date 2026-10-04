@@ -1,0 +1,31 @@
+.section-heading-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.section-heading-block__label {
+  margin: 0;
+}
+
+.section-heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+
+.section-heading-block:has(h1.section-heading) .section-heading,
+h1.section-heading {
+  font-size: var(--text-h1);
+  letter-spacing: var(--tracking-tight);
+}
+
+h3.section-heading {
+  font-size: var(--text-h3);
+  letter-spacing: var(--tracking-normal);
+}

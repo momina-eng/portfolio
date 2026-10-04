@@ -1,0 +1,40 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#241a0c"/>
+      <stop offset="100%" stop-color="#0a0a12"/>
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <filter id="glow3" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="200" height="200" rx="36" fill="url(#bgGrad3)"/>
+  <rect x="1" y="1" width="198" height="198" rx="35" fill="none" stroke="#f59e0b33" stroke-width="1.5"/>
+
+  <!-- clipboard outline -->
+  <g filter="url(#glow3)">
+    <rect x="54" y="44" width="92" height="112" rx="10" fill="none" stroke="#fcd34d" stroke-width="4"/>
+    <rect x="80" y="36" width="40" height="16" rx="6" fill="#0a0a12" stroke="#fcd34d" stroke-width="4"/>
+  </g>
+
+  <!-- bar chart / feedback pulse inside -->
+  <g>
+    <rect x="70" y="112" width="14" height="30" rx="3" fill="url(#barGrad)"/>
+    <rect x="93" y="92" width="14" height="50" rx="3" fill="url(#barGrad)"/>
+    <rect x="116" y="76" width="14" height="66" rx="3" fill="url(#barGrad)"/>
+  </g>
+
+  <!-- checkmark badge, representing "review/approve" feedback loop -->
+  <circle cx="140" cy="72" r="14" fill="#0a0a12" stroke="#fbbf24" stroke-width="3"/>
+  <path d="M134 72 L139 77 L147 66" fill="none" stroke="#fde68a" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

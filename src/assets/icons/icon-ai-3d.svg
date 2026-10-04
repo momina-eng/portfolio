@@ -1,0 +1,51 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="badgeGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d8b4fe"/>
+      <stop offset="55%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#581c87"/>
+    </linearGradient>
+    <linearGradient id="sheen4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="innerShadow4" cx="50%" cy="100%" r="80%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="dropshadow4" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#a855f7" flood-opacity="0.45"/>
+    </filter>
+    <filter id="iconShadow4" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <rect x="26" y="34" width="148" height="148" rx="34" fill="#3b0764"/>
+
+  <g filter="url(#dropshadow4)">
+    <rect x="22" y="26" width="148" height="148" rx="34" fill="url(#badgeGrad4)"/>
+    <rect x="22" y="26" width="148" height="148" rx="34" fill="url(#innerShadow4)"/>
+    <rect x="22" y="26" width="148" height="74" rx="34" fill="url(#sheen4)"/>
+  </g>
+
+  <path d="M40 30 Q96 18 152 30" stroke="#ffffff" stroke-opacity="0.5" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- neural network node icon -->
+  <g filter="url(#iconShadow4)">
+    <g stroke="#f5f3ff" stroke-width="4" opacity="0.9">
+      <line x1="100" y1="98" x2="66" y2="72"/>
+      <line x1="100" y1="98" x2="134" y2="72"/>
+      <line x1="100" y1="98" x2="66" y2="126"/>
+      <line x1="100" y1="98" x2="134" y2="126"/>
+      <line x1="100" y1="98" x2="100" y2="62"/>
+    </g>
+    <circle cx="100" cy="98" r="12" fill="#f5f3ff"/>
+    <circle cx="66" cy="72" r="7" fill="#f5f3ff"/>
+    <circle cx="134" cy="72" r="7" fill="#f5f3ff"/>
+    <circle cx="66" cy="126" r="7" fill="#f5f3ff"/>
+    <circle cx="134" cy="126" r="7" fill="#f5f3ff"/>
+    <circle cx="100" cy="62" r="7" fill="#f5f3ff"/>
+  </g>
+</svg>

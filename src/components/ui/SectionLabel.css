@@ -1,0 +1,10 @@
+.section-label {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}

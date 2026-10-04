@@ -1,0 +1,124 @@
+.ambient-glow {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-background);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ambient-glow__blob {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  contain: layout paint;
+  transform: translateZ(0);
+}
+
+.ambient-glow__blob--primary {
+  top: -12%;
+  left: 18%;
+  width: min(58vw, 520px);
+  height: min(58vw, 520px);
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.38) 0%,
+    rgba(139, 92, 246, 0.08) 45%,
+    transparent 70%
+  );
+}
+
+.ambient-glow__blob--secondary {
+  top: 18%;
+  right: -8%;
+  width: min(48vw, 420px);
+  height: min(48vw, 420px);
+  background: radial-gradient(
+    circle,
+    rgba(192, 38, 211, 0.22) 0%,
+    rgba(139, 92, 246, 0.06) 50%,
+    transparent 72%
+  );
+  opacity: 0.4;
+}
+
+.ambient-glow__blob--tertiary {
+  bottom: 8%;
+  left: 8%;
+  width: min(42vw, 360px);
+  height: min(42vw, 360px);
+  background: radial-gradient(
+    circle,
+    rgba(167, 139, 250, 0.18) 0%,
+    transparent 68%
+  );
+  opacity: 0.35;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ambient-glow__blob--primary {
+    animation: glow-drift-a var(--duration-ambient-drift) var(--ease-smooth)
+      infinite alternate;
+  }
+
+  .ambient-glow__blob--secondary {
+    animation: glow-drift-b calc(var(--duration-ambient-drift) * 1.25)
+      var(--ease-smooth) infinite alternate;
+  }
+
+  .ambient-glow__blob--tertiary {
+    animation: glow-drift-c calc(var(--duration-ambient-drift) * 1.45)
+      var(--ease-smooth) infinite alternate;
+  }
+}
+
+@keyframes glow-drift-a {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: translate3d(3%, 4%, 0);
+    opacity: 0.62;
+  }
+}
+
+@keyframes glow-drift-b {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.35;
+  }
+
+  to {
+    transform: translate3d(-4%, 3%, 0);
+    opacity: 0.48;
+  }
+}
+
+@keyframes glow-drift-c {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(2%, -3%, 0);
+  }
+}
+
+@media (max-width: 767px) {
+  .ambient-glow__blob {
+    filter: blur(56px);
+    opacity: 0.38;
+  }
+
+  .ambient-glow__blob--secondary,
+  .ambient-glow__blob--tertiary {
+    opacity: 0.24;
+  }
+
+  .ambient-glow__blob--tertiary {
+    display: none;
+  }
+}

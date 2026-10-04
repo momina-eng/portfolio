@@ -1,0 +1,110 @@
+.featured-lead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-block: var(--space-6) var(--space-8);
+}
+
+.featured-lead__eyebrow {
+  margin: 0;
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.featured-lead__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.featured-lead__media {
+  min-width: 0;
+}
+
+.featured-lead__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.featured-lead__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.featured-lead__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+  color: var(--color-accent-light);
+  font-size: 0.72rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.featured-lead__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-snug);
+  line-height: 1.15;
+}
+
+.featured-lead__subtitle {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+}
+
+.featured-lead__summary {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--color-text-secondary);
+  font-size: var(--text-body);
+  line-height: var(--leading-relaxed);
+}
+
+.featured-lead__tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.featured-lead__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.featured-lead__text-link {
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  text-decoration: none;
+}
+
+.featured-lead__text-link:hover,
+.featured-lead__text-link:focus-visible {
+  color: var(--color-accent-light);
+}
+
+@media (min-width: 960px) {
+  .featured-lead__layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: var(--space-8);
+  }
+}
